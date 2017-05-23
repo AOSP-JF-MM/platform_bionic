@@ -1030,7 +1030,7 @@ LOCAL_CPPFLAGS := $(libc_common_cppflags) -Wold-style-cast
 
 
 ifeq ($(BOARD_USES_LIBC_WRAPPER),true)
-LOCAL_CFLAGS += -DUSE_WRAPPER
+LOCAL_CPPFLAGS += -DUSE_WRAPPER
 endif
 
 LOCAL_C_INCLUDES := $(libc_common_c_includes) bionic/libstdc++/include
@@ -1066,6 +1066,10 @@ endif
 
 LOCAL_CONLYFLAGS := $(libc_common_conlyflags)
 LOCAL_CPPFLAGS := $(libc_common_cppflags) -Wold-style-cast \
+
+ifeq ($(BOARD_USES_LIBC_WRAPPER),true)
+LOCAL_CPPFLAGS += -DUSE_WRAPPER
+endif
 
 LOCAL_C_INCLUDES := $(libc_common_c_includes) bionic/libstdc++/include
 LOCAL_MODULE := libc_bionic_ndk
@@ -1410,7 +1414,7 @@ LOCAL_SRC_FILES := \
 
 ifeq ($(BOARD_USES_LIBC_WRAPPER),true)
     LOCAL_SRC_FILES += codeaurora/PropClient.cpp
-    LOCAL_CFLAGS += -DUSE_WRAPPER
+    LOCAL_CPPFLAGS += -DUSE_WRAPPER
 endif
 
 LOCAL_MODULE := libc
